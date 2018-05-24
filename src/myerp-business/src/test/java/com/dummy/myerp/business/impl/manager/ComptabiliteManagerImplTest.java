@@ -2,6 +2,7 @@ package com.dummy.myerp.business.impl.manager;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
@@ -9,6 +10,8 @@ import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
 import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
 import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
+
+import static com.dummy.myerp.consumer.ConsumerHelper.getDaoProxy;
 
 
 public class ComptabiliteManagerImplTest {
@@ -70,5 +73,8 @@ public class ComptabiliteManagerImplTest {
                                                                                  null));
         manager.checkEcritureComptableUnit(vEcritureComptable);
     }
+
+
+
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dummy.myerp.consumer.ConsumerHelper;
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 
 /**
@@ -39,4 +40,6 @@ public class CompteComptableDaoCache {
         CompteComptable vRetour = CompteComptable.getByNumero(listCompteComptable, pNumero);
         return vRetour;
     }
+
+
 }

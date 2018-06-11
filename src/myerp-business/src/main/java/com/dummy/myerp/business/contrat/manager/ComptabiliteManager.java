@@ -5,6 +5,7 @@ import java.util.List;
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
 import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
 import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
+import com.dummy.myerp.model.bean.comptabilite.SequenceEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 
 
@@ -37,6 +38,14 @@ public interface ComptabiliteManager {
     List<EcritureComptable> getListEcritureComptable();
 
     /**
+     * Renvoie la liste des sequences des écritures comptables.
+     *
+     * @return {@link List}
+     */
+    List<SequenceEcritureComptable> getListSequenceEcritureComptable();
+
+
+    /**
      * Ajoute une référence à l'écriture comptable.
      *
      * <strong>RG_Compta_5 : </strong>
@@ -50,7 +59,7 @@ public interface ComptabiliteManager {
      * <p><strong>Attention :</strong> l'écriture n'est pas enregistrée en persistance</p>
      * @param pEcritureComptable L'écriture comptable concernée
      */
-    void addReference(EcritureComptable pEcritureComptable);
+    void addReference(EcritureComptable pEcritureComptable) ;
 
     /**
      * Vérifie que l'Ecriture comptable respecte les règles de gestion.

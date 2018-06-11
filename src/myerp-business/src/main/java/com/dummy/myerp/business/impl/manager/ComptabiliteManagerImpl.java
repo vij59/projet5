@@ -6,15 +6,12 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import com.dummy.myerp.model.bean.comptabilite.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.TransactionStatus;
 import com.dummy.myerp.business.contrat.manager.ComptabiliteManager;
 import com.dummy.myerp.business.impl.AbstractBusinessManager;
-import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
-import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
-import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
-import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 import com.dummy.myerp.technical.exception.NotFoundException;
 
@@ -58,10 +55,34 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     /**
      * {@inheritDoc}
      */
+
+    @Override
+    public List<SequenceEcritureComptable> getListSequenceEcritureComptable() {
+        return getDaoProxy().getComptabiliteDao().getListSequenceEcritureComptable();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     // TODO à tester
     @Override
     public synchronized void addReference(EcritureComptable pEcritureComptable) {
         // TODO à implémenter
+
+        SequenceEcritureComptable sq;
+        sq.setDerniereValeur("un");
+        sq.setAnnee(1998);
+
+        List<SequenceEcritureComptable> liste = getListSequenceEcritureComptable();
+        if (liste!= null) {
+           // int derniereValeur = liste.get(liste.size() - 1).getDerniereValeur();
+            System.out.println("er");
+        }
+        else {
+            System.out.print("bite");
+
+        }
+
         // Bien se réferer à la JavaDoc de cette méthode !
         /* Le principe :
                 1.  Remonter depuis la persitance la dernière valeur de la séquence du journal pour l'année de l'écriture
@@ -74,6 +95,9 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
                 4.  Enregistrer (insert/update) la valeur de la séquence en persitance
                     (table sequence_ecriture_comptable)
          */
+
+
+
     }
 
     /**

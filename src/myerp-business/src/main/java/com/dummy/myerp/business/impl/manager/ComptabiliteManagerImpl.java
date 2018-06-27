@@ -12,6 +12,8 @@ import org.springframework.transaction.TransactionStatus;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -75,7 +77,13 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         // TODO à implémenter
 
 //        SequenceEcritureComptable sq = null;
-//        int year = (int)pEcritureComptable.getDate().getTime();
+      Date year = pEcritureComptable.getDate();
+
+      Calendar cal = Calendar.getInstance();
+        cal.setTime(year);
+
+        int yy = cal.get(Calendar.YEAR);
+
 //        SequenceEcritureComptable seq = getLastSequenceEcritureComptable(year,pEcritureComptable.getJournal().getCode());
 //        if (seq!= null) {
 //           // int derniereValeur = liste.get(liste.size() - 1).getDerniereValeur();
@@ -85,10 +93,29 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
 //            System.out.print("bite");
 //
 //        }
+try {
+    SequenceEcritureComptable liste1 = getLastSequenceEcritureComptable(yy, pEcritureComptable.getJournal().getCode());
+    SequenceEcritureComptable liste2 = getLastSequenceEcritureComptable(yy - 1, pEcritureComptable.getJournal().getCode());
+    SequenceEcritureComptable liste3 = getLastSequenceEcritureComptable(yy - 2, pEcritureComptable.getJournal().getCode());
+    SequenceEcritureComptable liste4 = getLastSequenceEcritureComptable(yy - 3, pEcritureComptable.getJournal().getCode());
+    SequenceEcritureComptable liste5 = getLastSequenceEcritureComptable(yy - 5, pEcritureComptable.getJournal().getCode());
 
-        List <SequenceEcritureComptable> liste = getListSequenceEcritureComptable();
-        System.out.print(liste.toString());
-        System.out.print("bite");
+
+
+    System.out.print("bite1");
+    System.out.println(liste3.getAnnee());
+    System.out.print("bite2");
+    System.out.print("bite1");
+    System.out.println(liste4.getAnnee());
+    System.out.print("bite2");
+    System.out.print("bite1");
+    System.out.println(liste5.getAnnee());
+    System.out.print("bite2");
+
+}
+catch(Exception e) {
+    System.out.print(e);
+}
 
         // Bien se réferer à la JavaDoc de cette méthode !
         /* Le principe :

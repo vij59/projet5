@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+
+import com.dummy.myerp.testbusiness.business.BusinessTestCase;
 import org.junit.Test;
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
 import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
@@ -14,7 +16,7 @@ import com.dummy.myerp.technical.exception.FunctionalException;
 import static com.dummy.myerp.consumer.ConsumerHelper.getDaoProxy;
 
 
-public class ComptabiliteManagerImplTest {
+public class ComptabiliteManagerImplTest extends BusinessTestCase {
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
 
@@ -75,7 +77,7 @@ public class ComptabiliteManagerImplTest {
     }
 
     @Test
-    public void testAddReference() {
+    public void testAddReference() throws Exception {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
         vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));

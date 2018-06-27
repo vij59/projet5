@@ -1,19 +1,19 @@
 package com.dummy.myerp.business.impl.manager;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-
+import com.dummy.myerp.business.contrat.manager.ComptabiliteManager;
+import com.dummy.myerp.business.impl.AbstractBusinessManager;
 import com.dummy.myerp.model.bean.comptabilite.*;
+import com.dummy.myerp.technical.exception.FunctionalException;
+import com.dummy.myerp.technical.exception.NotFoundException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.TransactionStatus;
-import com.dummy.myerp.business.contrat.manager.ComptabiliteManager;
-import com.dummy.myerp.business.impl.AbstractBusinessManager;
-import com.dummy.myerp.technical.exception.FunctionalException;
-import com.dummy.myerp.technical.exception.NotFoundException;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -61,27 +61,34 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         return getDaoProxy().getComptabiliteDao().getListSequenceEcritureComptable();
     }
 
+    @Override
+    public SequenceEcritureComptable getLastSequenceEcritureComptable(int year, String code) throws FunctionalException {
+        return getDaoProxy().getComptabiliteDao().getLastSequenceEcritureComptable(year,code);
+    }
+
     /**
      * {@inheritDoc}
      */
     // TODO à tester
     @Override
-    public synchronized void addReference(EcritureComptable pEcritureComptable) {
+    public synchronized void addReference(EcritureComptable pEcritureComptable) throws FunctionalException {
         // TODO à implémenter
 
-        SequenceEcritureComptable sq;
-        sq.setDerniereValeur("un");
-        sq.setAnnee(1998);
+//        SequenceEcritureComptable sq = null;
+//        int year = (int)pEcritureComptable.getDate().getTime();
+//        SequenceEcritureComptable seq = getLastSequenceEcritureComptable(year,pEcritureComptable.getJournal().getCode());
+//        if (seq!= null) {
+//           // int derniereValeur = liste.get(liste.size() - 1).getDerniereValeur();
+//            System.out.println("er");
+//        }
+//        else {
+//            System.out.print("bite");
+//
+//        }
 
-        List<SequenceEcritureComptable> liste = getListSequenceEcritureComptable();
-        if (liste!= null) {
-           // int derniereValeur = liste.get(liste.size() - 1).getDerniereValeur();
-            System.out.println("er");
-        }
-        else {
-            System.out.print("bite");
-
-        }
+        List <SequenceEcritureComptable> liste = getListSequenceEcritureComptable();
+        System.out.print(liste.toString());
+        System.out.print("bite");
 
         // Bien se réferer à la JavaDoc de cette méthode !
         /* Le principe :

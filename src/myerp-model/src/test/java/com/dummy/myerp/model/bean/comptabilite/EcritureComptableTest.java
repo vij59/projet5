@@ -24,7 +24,7 @@ public class EcritureComptableTest {
     }
 
     @Test
-    public void testIsEquilibree() {
+    public void isEquilibree() {
         EcritureComptable vEcriture;
         vEcriture = new EcritureComptable();
 

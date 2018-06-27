@@ -44,6 +44,12 @@ public interface ComptabiliteManager {
      */
     List<SequenceEcritureComptable> getListSequenceEcritureComptable();
 
+    /**
+     * Renvoie la derniere sequance d ecriture comptable.
+     *
+     * @return {@link List}
+     */
+    SequenceEcritureComptable getLastSequenceEcritureComptable(int year,String code)throws FunctionalException;
 
     /**
      * Ajoute une référence à l'écriture comptable.
@@ -59,7 +65,7 @@ public interface ComptabiliteManager {
      * <p><strong>Attention :</strong> l'écriture n'est pas enregistrée en persistance</p>
      * @param pEcritureComptable L'écriture comptable concernée
      */
-    void addReference(EcritureComptable pEcritureComptable) ;
+    void addReference(EcritureComptable pEcritureComptable) throws FunctionalException ;
 
     /**
      * Vérifie que l'Ecriture comptable respecte les règles de gestion.

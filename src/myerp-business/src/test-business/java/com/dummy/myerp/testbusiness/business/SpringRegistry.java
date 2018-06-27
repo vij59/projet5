@@ -91,6 +91,6 @@ public final class SpringRegistry {
      * @return {@link TransactionManager}
      */
     public static TransactionManager getTransactionManager() {
-        return (TransactionManager) SpringRegistry.getBean("TransactionManager");
+        return (TransactionManager) SpringRegistry.getBean("transactionManager");
     }
 }

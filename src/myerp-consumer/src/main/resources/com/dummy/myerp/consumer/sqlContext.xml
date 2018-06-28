@@ -80,6 +80,16 @@
                 )
             </value>
         </property>
+        <property name="SQLinsertSequenceEcritureComptable">
+            <value>
+                INSERT INTO myerp.sequence_ecriture_comptable (
+                journal_code, annee, derniere_valeur
+                ) VALUES (
+                nextval('myerp.sequence_ecriture_comptable'),
+                :journal_code, :annee, :derniere_valeur
+                )
+            </value>
+        </property>
         <property name="SQLupdateEcritureComptable">
             <value>
                 UPDATE myerp.ecriture_comptable SET

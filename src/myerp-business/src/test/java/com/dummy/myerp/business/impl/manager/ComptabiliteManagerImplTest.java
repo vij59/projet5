@@ -5,12 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 
+import com.dummy.myerp.model.bean.comptabilite.*;
 import com.dummy.myerp.testbusiness.business.BusinessTestCase;
 import org.junit.Test;
-import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
-import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
-import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
-import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
 import com.dummy.myerp.technical.exception.FunctionalException;
 
 import static com.dummy.myerp.consumer.ConsumerHelper.getDaoProxy;
@@ -80,7 +77,7 @@ public class ComptabiliteManagerImplTest extends BusinessTestCase {
     public void testAddReference() throws Exception {
         EcritureComptable vEcritureComptable;
         vEcritureComptable = new EcritureComptable();
-        vEcritureComptable.setJournal(new JournalComptable("AC", "Achat"));
+        vEcritureComptable.setJournal(new JournalComptable("AC", "Achats"));
         vEcritureComptable.setDate(new Date());
         vEcritureComptable.setLibelle("Libelle");
         vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
@@ -89,6 +86,8 @@ public class ComptabiliteManagerImplTest extends BusinessTestCase {
         vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
                 null, new BigDecimal(123),
                 null));
+
+
         manager.addReference(vEcritureComptable);
 
     }

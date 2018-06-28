@@ -68,6 +68,11 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         return getDaoProxy().getComptabiliteDao().getLastSequenceEcritureComptable(year,code);
     }
 
+    @Override
+    public void newSequence(SequenceEcritureComptable pSequenceEcritureComptable, String code) throws FunctionalException {
+        getDaoProxy().getComptabiliteDao().insertSequenceEcritureComptable(pSequenceEcritureComptable,  code);
+
+    }
     /**
      * {@inheritDoc}
      */
@@ -76,6 +81,8 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     public synchronized void addReference(EcritureComptable pEcritureComptable) throws FunctionalException {
         // TODO à implémenter
 
+
+
 //        SequenceEcritureComptable sq = null;
       Date year = pEcritureComptable.getDate();
 
@@ -83,8 +90,9 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         cal.setTime(year);
 
         int yy = cal.get(Calendar.YEAR);
+      // System.out.print(yy);
 
-//        SequenceEcritureComptable seq = getLastSequenceEcritureComptable(year,pEcritureComptable.getJournal().getCode());
+      SequenceEcritureComptable seq = getLastSequenceEcritureComptable(yy,pEcritureComptable.getJournal().getCode());
 //        if (seq!= null) {
 //           // int derniereValeur = liste.get(liste.size() - 1).getDerniereValeur();
 //            System.out.println("er");
@@ -94,23 +102,35 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
 //
 //        }
 try {
-    SequenceEcritureComptable liste1 = getLastSequenceEcritureComptable(yy, pEcritureComptable.getJournal().getCode());
+    /*SequenceEcritureComptable liste1 = getLastSequenceEcritureComptable(yy, pEcritureComptable.getJournal().getCode());
     SequenceEcritureComptable liste2 = getLastSequenceEcritureComptable(yy - 1, pEcritureComptable.getJournal().getCode());
     SequenceEcritureComptable liste3 = getLastSequenceEcritureComptable(yy - 2, pEcritureComptable.getJournal().getCode());
     SequenceEcritureComptable liste4 = getLastSequenceEcritureComptable(yy - 3, pEcritureComptable.getJournal().getCode());
     SequenceEcritureComptable liste5 = getLastSequenceEcritureComptable(yy - 5, pEcritureComptable.getJournal().getCode());
+*/
 
+//
+//    System.out.print("bite1");
+//    System.out.println(liste3.getAnnee());
+//    System.out.print("bite2");
+//    System.out.print("bite1");
+//    System.out.println(liste4.getAnnee());
+//    System.out.print("bite2");
+//    System.out.print("bite1");
+//    System.out.println(liste5.getAnnee());
+//    System.out.print("bite2");
+    SequenceEcritureComptable seq2 = new SequenceEcritureComptable();
+    if (seq == null) {
 
+        seq2.setAnnee(yy);
+
+    }
 
     System.out.print("bite1");
-    System.out.println(liste3.getAnnee());
+   // System.out.println(seq.getAnnee());
     System.out.print("bite2");
-    System.out.print("bite1");
-    System.out.println(liste4.getAnnee());
-    System.out.print("bite2");
-    System.out.print("bite1");
-    System.out.println(liste5.getAnnee());
-    System.out.print("bite2");
+    System.out.println(seq2.getAnnee());
+
 
 }
 catch(Exception e) {

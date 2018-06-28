@@ -90,4 +90,12 @@ public interface ComptabiliteDao {
     void deleteEcritureComptable(Integer pId);
 
     SequenceEcritureComptable getLastSequenceEcritureComptable(int year,String code) throws FunctionalException;
+    /**
+     * Insert une nouvelle écriture comptable.
+     *
+     * @param pSequenceEcritureComptable -
+     */
+    void insertSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable, String code);
+
+
 }

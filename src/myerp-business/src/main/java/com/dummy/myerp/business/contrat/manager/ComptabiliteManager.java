@@ -97,4 +97,6 @@ public interface ComptabiliteManager {
      * @param pId l'id de l'écriture
      */
     void deleteEcritureComptable(Integer pId);
+
+    public void newSequence(SequenceEcritureComptable pSequenceEcritureComptable, String code) throws FunctionalException;
 }

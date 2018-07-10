@@ -69,6 +69,12 @@ public interface ComptabiliteDao {
     void loadListLigneEcriture(EcritureComptable pEcritureComptable);
 
     /**
+     * Insert un nouveau compte comptable.
+     *
+     * @param pCompteComptable -
+     */
+     void insertCompteComptable(CompteComptable pCompteComptable);
+    /**
      * Insert une nouvelle écriture comptable.
      *
      * @param pEcritureComptable -
@@ -97,5 +103,5 @@ public interface ComptabiliteDao {
      */
     void insertSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable, String code);
 
-
+    void updateSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable, String code);
 }

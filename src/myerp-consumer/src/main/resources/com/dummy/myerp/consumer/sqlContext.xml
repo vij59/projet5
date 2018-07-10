@@ -58,6 +58,15 @@
                 ORDER BY ligne_id
             </value>
         </property>
+        <property name="SQLinsertCompteComptable">
+        <value>
+            INSERT INTO myerp.compte_comptable (
+           numero, libelle
+            ) VALUES (
+             :numero, :libelle
+            )
+        </value>
+        </property>
         <property name="SQLinsertEcritureComptable">
             <value>
                 INSERT INTO myerp.ecriture_comptable (
@@ -72,7 +81,7 @@
         <property name="SQLinsertListLigneEcritureComptable">
             <value>
                 INSERT INTO myerp.ligne_ecriture_comptable (
-                    ecriture_id, ligne_id, compte_comptable_numero, libelle, debit
+                    ecriture_id, ligne_id, compte_comptable_numero, libelle, debit,
                     credit
                 ) VALUES (
                     :ecriture_id, :ligne_id, :compte_comptable_numero, :libelle, :debit,
@@ -81,13 +90,20 @@
             </value>
         </property>
         <property name="SQLinsertSequenceEcritureComptable">
+        <value>
+            INSERT INTO myerp.sequence_ecriture_comptable (
+            journal_code, annee, derniere_valeur
+            ) VALUES (
+            :journal_code, :annee, :derniere_valeur
+            )
+        </value>
+    </property>
+        <property name="SQLupdateSequenceEcritureComptable">
             <value>
-                INSERT INTO myerp.sequence_ecriture_comptable (
-                journal_code, annee, derniere_valeur
-                ) VALUES (
-                nextval('myerp.sequence_ecriture_comptable'),
-                :journal_code, :annee, :derniere_valeur
-                )
+                UPDATE myerp.sequence_ecriture_comptable SET
+                 derniere_valeur = :derniere_valeur
+               WHERE
+                annee = :annee AND journal_code = :journal_code
             </value>
         </property>
         <property name="SQLupdateEcritureComptable">

@@ -47,7 +47,7 @@ public abstract class AbstractBusinessManager {
      *
      * @return {@link BusinessProxy}
      */
-    protected BusinessProxy getBusinessProxy() {
+    public BusinessProxy getBusinessProxy() {
         return businessProxy;
     }
 

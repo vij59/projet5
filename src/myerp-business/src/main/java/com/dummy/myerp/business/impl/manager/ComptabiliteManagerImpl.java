@@ -2,6 +2,7 @@ package com.dummy.myerp.business.impl.manager;
 
 import com.dummy.myerp.business.contrat.manager.ComptabiliteManager;
 import com.dummy.myerp.business.impl.AbstractBusinessManager;
+import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
 import com.dummy.myerp.model.bean.comptabilite.*;
 import com.dummy.myerp.technical.exception.FunctionalException;
 import com.dummy.myerp.technical.exception.NotFoundException;
@@ -12,6 +13,7 @@ import org.springframework.transaction.TransactionStatus;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -70,8 +72,27 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
 
     @Override
     public void newSequence(SequenceEcritureComptable pSequenceEcritureComptable, String code) throws FunctionalException {
-        getDaoProxy().getComptabiliteDao().insertSequenceEcritureComptable(pSequenceEcritureComptable,  code);
+        TransactionStatus vTS = getTransactionManager().beginTransactionMyERP();
+        try {
+            getDaoProxy().getComptabiliteDao().insertSequenceEcritureComptable(pSequenceEcritureComptable, code);
+            getTransactionManager().commitMyERP(vTS);
+            vTS = null;
+        } finally {
+            getTransactionManager().rollbackMyERP(vTS);
+        }
+    }
 
+    @Override
+    public void updateSequence(SequenceEcritureComptable pSequenceEcritureComptable, String code) throws FunctionalException {
+
+        TransactionStatus vTS = getTransactionManager().beginTransactionMyERP();
+        try {
+            getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(pSequenceEcritureComptable,  code);
+            getTransactionManager().commitMyERP(vTS);
+            vTS = null;
+        } finally {
+            getTransactionManager().rollbackMyERP(vTS);
+        }
     }
     /**
      * {@inheritDoc}
@@ -81,55 +102,87 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
     public synchronized void addReference(EcritureComptable pEcritureComptable) throws FunctionalException {
         // TODO à implémenter
 
-
-
-//        SequenceEcritureComptable sq = null;
       Date year = pEcritureComptable.getDate();
 
       Calendar cal = Calendar.getInstance();
         cal.setTime(year);
-
         int yy = cal.get(Calendar.YEAR);
-      // System.out.print(yy);
 
-      SequenceEcritureComptable seq = getLastSequenceEcritureComptable(yy,pEcritureComptable.getJournal().getCode());
-//        if (seq!= null) {
-//           // int derniereValeur = liste.get(liste.size() - 1).getDerniereValeur();
-//            System.out.println("er");
-//        }
-//        else {
-//            System.out.print("bite");
-//
-//        }
+        System.out.println(yy);
+
 try {
-    /*SequenceEcritureComptable liste1 = getLastSequenceEcritureComptable(yy, pEcritureComptable.getJournal().getCode());
-    SequenceEcritureComptable liste2 = getLastSequenceEcritureComptable(yy - 1, pEcritureComptable.getJournal().getCode());
-    SequenceEcritureComptable liste3 = getLastSequenceEcritureComptable(yy - 2, pEcritureComptable.getJournal().getCode());
-    SequenceEcritureComptable liste4 = getLastSequenceEcritureComptable(yy - 3, pEcritureComptable.getJournal().getCode());
-    SequenceEcritureComptable liste5 = getLastSequenceEcritureComptable(yy - 5, pEcritureComptable.getJournal().getCode());
-*/
+    SequenceEcritureComptable seq = getLastSequenceEcritureComptable(yy, pEcritureComptable.getJournal().getCode());
 
-//
-//    System.out.print("bite1");
-//    System.out.println(liste3.getAnnee());
-//    System.out.print("bite2");
-//    System.out.print("bite1");
-//    System.out.println(liste4.getAnnee());
-//    System.out.print("bite2");
-//    System.out.print("bite1");
-//    System.out.println(liste5.getAnnee());
-//    System.out.print("bite2");
-    SequenceEcritureComptable seq2 = new SequenceEcritureComptable();
-    if (seq == null) {
+    String y = pEcritureComptable.getReference();
+    y = y.substring(y.length()-5, y.length());
 
-        seq2.setAnnee(yy);
+    String reff = getDaoProxy().getComptabiliteDao().getEcritureComptableByRef(pEcritureComptable.getReference()).getReference();
+    reff = reff.substring(reff.length()-5, reff.length());
+    System.out.println("ref en base : "+ reff);
 
+
+    System.out.println("derniere ref : "+y);
+    int nouvelleValeur = Integer.parseInt(y);
+    System.out.print(nouvelleValeur);
+    int x;
+    if(seq== null) {
+       x=1;
+    }
+    else {
+
+        x = seq.getDerniereValeur()+1;
     }
 
-    System.out.print("bite1");
-   // System.out.println(seq.getAnnee());
-    System.out.print("bite2");
-    System.out.println(seq2.getAnnee());
+
+    String ref = pEcritureComptable.getReference();
+
+    SequenceEcritureComptable nouvelleSeq = new SequenceEcritureComptable();
+    nouvelleSeq.setAnnee(yy);
+    nouvelleSeq.setDerniereValeur(x);
+    nouvelleValeur++;
+
+    List<EcritureComptable> listeEc = getDaoProxy().getComptabiliteDao().getListEcritureComptable();
+
+    for(EcritureComptable ecriture : listeEc)
+    {
+        String refEcritureEnCours = ecriture.getReference();
+        String refBoucle =refEcritureEnCours.substring(refEcritureEnCours.length()-5, refEcritureEnCours.length());
+        int refBis = Integer.parseInt(refBoucle);
+        Date dateBoucleNew = ecriture.getDate();
+        Date dateBoucleRef = pEcritureComptable.getDate();
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(dateBoucleNew);
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(dateBoucleRef);
+        int yearBoucleNew = cal2.get(Calendar.YEAR);
+        int yearBoucleRef = cal1.get(Calendar.YEAR);
+
+        System.out.println(" derniere reference = " +ecriture.getReference());
+        System.out.println(" nouvelle valeur = " +nouvelleValeur);
+
+        if(yearBoucleNew == yearBoucleRef &&
+                ecriture.getJournal().getCode().equals(pEcritureComptable.getJournal().getCode())
+                && refBis == nouvelleValeur)
+        {
+             nouvelleValeur++;
+            System.out.println(" derniere reference = " +ecriture.getReference());
+            System.out.println(" nouvelle valeur = " +nouvelleValeur);
+        }
+    }
+    String nvelleRef = pEcritureComptable.getJournal().getCode() + "-" + yy + "/"+ String.format("%05d",nouvelleValeur);
+
+
+    pEcritureComptable.setReference(nvelleRef);
+
+    updateEcritureComptable(pEcritureComptable);
+
+    if(x==1) {
+        newSequence(nouvelleSeq,pEcritureComptable.getJournal().getCode());
+    }
+    else {
+        updateSequence(nouvelleSeq,pEcritureComptable.getJournal().getCode());
+    }
+
 
 
 }
@@ -212,6 +265,24 @@ catch(Exception e) {
 
         // TODO ===== RG_Compta_5 : Format et contenu de la référence
         // vérifier que l'année dans la référence correspond bien à la date de l'écriture, idem pour le code journal...
+
+
+        String anneeString = pEcritureComptable.getReference().substring(3,7);
+        int anneeInt = Integer.parseInt(anneeString);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        String yearRef = sdf.format(pEcritureComptable.getDate());
+        int yearInt = Integer.parseInt(yearRef);
+
+        if (anneeInt != yearInt) {
+            throw new FunctionalException("L'année de la référence doit correspondre à la date de l'écriture.");
+        }
+
+        String codeRef = pEcritureComptable.getReference().substring(0,2);
+
+        if(!codeRef.equals(pEcritureComptable.getJournal().getCode())) {
+            throw new FunctionalException("a référence doit avoir le même code que le code journal de l'Ecriture");
+        }
     }
 
 
@@ -252,6 +323,18 @@ catch(Exception e) {
         TransactionStatus vTS = getTransactionManager().beginTransactionMyERP();
         try {
             getDaoProxy().getComptabiliteDao().insertEcritureComptable(pEcritureComptable);
+            getTransactionManager().commitMyERP(vTS);
+            vTS = null;
+        } finally {
+            getTransactionManager().rollbackMyERP(vTS);
+        }
+    }
+
+    @Override
+    public void insertCompteComptable(CompteComptable pCompteComptable) throws FunctionalException {
+        TransactionStatus vTS = getTransactionManager().beginTransactionMyERP();
+        try {
+            getDaoProxy().getComptabiliteDao().insertCompteComptable(pCompteComptable);
             getTransactionManager().commitMyERP(vTS);
             vTS = null;
         } finally {

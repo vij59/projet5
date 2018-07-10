@@ -84,6 +84,14 @@ public interface ComptabiliteManager {
     void insertEcritureComptable(EcritureComptable pEcritureComptable) throws FunctionalException;
 
     /**
+     * Insert une nouvelle écriture comptable.
+     *
+     * @param pCompteComptable -
+     * @throws FunctionalException Si le compte comptable ne respecte pas les règles de gestion
+     */
+    void insertCompteComptable(CompteComptable pCompteComptable) throws FunctionalException;
+
+    /**
      * Met à jour l'écriture comptable.
      *
      * @param pEcritureComptable -
@@ -99,4 +107,6 @@ public interface ComptabiliteManager {
     void deleteEcritureComptable(Integer pId);
 
     public void newSequence(SequenceEcritureComptable pSequenceEcritureComptable, String code) throws FunctionalException;
+
+    public void updateSequence(SequenceEcritureComptable pSequenceEcritureComptable, String code) throws FunctionalException;
 }

@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -57,7 +58,6 @@ public class EcritureComptableTest {
         vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "300"));
         vEcriture.getListLigneEcriture().add(this.createLigne(2, "40", "7"));
 
-        System.out.println(vEcriture.toString());
         for (LigneEcritureComptable vLigneEcritureComptable : vEcriture.getListLigneEcriture()) {
             if (vLigneEcritureComptable.getDebit() != null) {
                 vRetour = vRetour.add(vLigneEcritureComptable.getDebit());
@@ -81,7 +81,7 @@ public class EcritureComptableTest {
         vEcriture.getListLigneEcriture().add(this.createLigne(2, null, "30"));
         vEcriture.getListLigneEcriture().add(this.createLigne(2, "1", "2"));
 
-        System.out.println(vEcriture.toString());
+
         for (LigneEcritureComptable vLigneEcritureComptable : vEcriture.getListLigneEcriture()) {
             if (vLigneEcritureComptable.getCredit() != null) {
                 vRetour = vRetour.add(vLigneEcritureComptable.getCredit());
@@ -114,4 +114,32 @@ public class EcritureComptableTest {
         Assert.assertTrue(vEcriture.getId().equals(1));
     }
 
+    @Test
+    public void testToString() {
+        EcritureComptable vEcritureComptable = new EcritureComptable();
+
+        vEcritureComptable.setId(1);
+        vEcritureComptable.setJournal(new JournalComptable("AC", "Achats"));
+        Date dateNew = new Date();
+        vEcritureComptable.setDate(dateNew);
+        vEcritureComptable.setReference("AC-2018/00001");
+        vEcritureComptable.setLibelle("Libelle");
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+    String tostring =    "EcritureComptable{id=1, " +
+                "journal=JournalComptable{code='AC'" +
+                ", libelle='Achats'}, reference='AC-2018/00001', date="+dateNew+
+                ", libelle='Libelle', totalDebit=123, totalCredit=123" +
+                ", listLigneEcriture=[\n" +
+                "LigneEcritureComptable{compteComptable=CompteComptable{numero=1, libelle='null'}, libelle='null', debit=123, credit=null}\n" +
+                "LigneEcritureComptable{compteComptable=CompteComptable{numero=2, libelle='null'}, libelle='null', debit=null, credit=123}\n" +
+                "]}";
+
+        Assert.assertTrue(vEcritureComptable.toString().equals(tostring));
+    }
 }

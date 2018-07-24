@@ -4,7 +4,7 @@ import com.dummy.myerp.consumer.dao.contrat.DaoProxy;
 
 
 /**
- * Classe d'aide pour les classes du module consumer
+ * Classe d'aide pour les classes du module testconsumer.consumer.consumercontext
  */
 public abstract class ConsumerHelper {
 

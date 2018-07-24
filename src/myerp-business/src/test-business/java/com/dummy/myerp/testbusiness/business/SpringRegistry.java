@@ -25,7 +25,7 @@ public final class SpringRegistry {
     private static final String CONTEXT_APPLI_LOCATION
         = "classpath:/com/dummy/myerp/testbusiness/business/bootstrapContext.xml";
 
-    /** Le context spring de l'application */
+    /** Le consumercontext spring de l'application */
     private ApplicationContext contextAppli;
 
 
@@ -57,7 +57,7 @@ public final class SpringRegistry {
      * @return ApplicationContext
      */
     public static final ApplicationContext init() {
-        // le fait d'appeler cette méthode, déclanche l'appel des initialisation static et donc le chargement du context
+        // le fait d'appeler cette méthode, déclanche l'appel des initialisation static et donc le chargement du consumercontext
         return getInstance().contextAppli;
     }
 

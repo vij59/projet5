@@ -1,8 +1,5 @@
 package com.dummy.myerp.consumer.dao.impl.db.dao;
 
-import java.sql.Types;
-import java.util.List;
-
 import com.dummy.myerp.consumer.dao.impl.db.rowmapper.comptabilite.*;
 import com.dummy.myerp.model.bean.comptabilite.*;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -13,6 +10,9 @@ import com.dummy.myerp.consumer.dao.contrat.ComptabiliteDao;
 import com.dummy.myerp.consumer.db.AbstractDbConsumer;
 import com.dummy.myerp.consumer.db.DataSourcesEnum;
 import com.dummy.myerp.technical.exception.NotFoundException;
+
+import java.sql.Types;
+import java.util.List;
 
 
 /**
@@ -36,7 +36,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     /**
      * Constructeur.
      */
-    protected ComptabiliteDaoImpl() {
+    public ComptabiliteDaoImpl() {
         super();
     }
 
@@ -328,7 +328,7 @@ public class ComptabiliteDaoImpl extends AbstractDbConsumer implements Comptabil
     }
     @Override
     public void insertSequenceEcritureComptable(SequenceEcritureComptable pSequenceEcritureComptable, String code) {
-        // ===== Ecriture Comptable
+        // ===== Sequence Ecriture Comptable
         NamedParameterJdbcTemplate vJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource(DataSourcesEnum.MYERP));
         MapSqlParameterSource vSqlParams = new MapSqlParameterSource();
         vSqlParams.addValue("annee", pSequenceEcritureComptable.getAnnee());

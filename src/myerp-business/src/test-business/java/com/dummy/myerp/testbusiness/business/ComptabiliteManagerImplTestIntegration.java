@@ -5,15 +5,18 @@ import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
 import com.dummy.myerp.model.bean.comptabilite.EcritureComptable;
 import com.dummy.myerp.model.bean.comptabilite.JournalComptable;
 import com.dummy.myerp.model.bean.comptabilite.LigneEcritureComptable;
+import com.dummy.myerp.technical.exception.FunctionalException;
 import org.junit.Test;
 import org.testng.Assert;
 
 import javax.validation.constraints.AssertTrue;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertThat;
+import static org.testng.Assert.assertThrows;
 
 
 public class ComptabiliteManagerImplTestIntegration extends BusinessTestCase {
@@ -68,7 +71,7 @@ public class ComptabiliteManagerImplTestIntegration extends BusinessTestCase {
         int num = getBusinessProxy().getComptabiliteManager().getListCompteComptable().get(listeComptesOrigine.size()-1).getNumero();
         if(num == 4455 ) { num = 4457;}
         compteComptable.setNumero(num+1);
-        compteComptable.setLibelle("tartaruga"+1);
+        compteComptable.setLibelle("tartaruga"+num);
         listeComptesOrigine.add(compteComptable);
         getBusinessProxy().getComptabiliteManager().insertCompteComptable(compteComptable);
 
@@ -85,6 +88,34 @@ public class ComptabiliteManagerImplTestIntegration extends BusinessTestCase {
        // assertThat(listeComptesOrigine, samePropertyValuesAs(listeComptesFinal));
      // (listeComptesOrigine, (listeComptesFinal));
         Assert.assertEquals(compteComptable.getLibelle(), listeComptesFinal.get(listeComptesFinal.size()-1).getLibelle());
+    }
+
+
+    @Test
+    public void checkEcritureComptable() throws FunctionalException {
+        EcritureComptable vEcritureComptable = new EcritureComptable();
+
+        vEcritureComptable.setJournal(new JournalComptable("AC", "Achats"));
+        vEcritureComptable.setDate(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        String yearRef = sdf.format(vEcritureComptable.getDate());
+        vEcritureComptable.setReference("AC-"+yearRef+"/00001");
+        vEcritureComptable.setLibelle("Libelle");
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(1),
+                null, new BigDecimal(123),
+                null));
+        vEcritureComptable.getListLigneEcriture().add(new LigneEcritureComptable(new CompteComptable(2),
+                null, null,
+                new BigDecimal(123)));
+
+        manager.checkEcritureComptableUnit(vEcritureComptable);
+        manager.checkEcritureComptableContext(vEcritureComptable);
+
+        assertThrows(FunctionalException.class,()-> {
+            vEcritureComptable.setReference("AC-2016/00001");
+            manager.checkEcritureComptableContext(vEcritureComptable);
+        });
+
     }
 
 }

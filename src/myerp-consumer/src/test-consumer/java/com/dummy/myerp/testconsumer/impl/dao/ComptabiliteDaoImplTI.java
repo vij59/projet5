@@ -1,4 +1,4 @@
-package com.dummy.myerp.consumer.impl;
+package com.dummy.myerp.testconsumer.impl.dao;
 
 
 import com.dummy.myerp.model.bean.comptabilite.CompteComptable;
@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.util.Date;
 import java.util.List;
+
 
 public class ComptabiliteDaoImplTI extends ConsumerTestCase {
 

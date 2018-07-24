@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 import static org.testng.Assert.assertThrows;
 
 
-public class ComptabiliteManagerImplTestIntegration extends BusinessTestCase {
+public class ComptabiliteManagerImplIntegrationTest extends BusinessTestCase {
 
    private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
 

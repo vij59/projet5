@@ -13,7 +13,7 @@ import com.dummy.myerp.technical.exception.FunctionalException;
 import static org.testng.Assert.assertThrows;
 
 
-public class ComptabiliteManagerImplTestUnitaire {
+public class ComptabiliteManagerImplUnitTest {
 
     private ComptabiliteManagerImpl manager = new ComptabiliteManagerImpl();
 

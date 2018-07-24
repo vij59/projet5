@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class ComptabiliteDaoImplTI extends ConsumerTestCase {
+public class ComptabiliteDaoImplTest extends ConsumerTestCase {
 
 
      //ComptabiliteDaoImpl comptabiliteDao = new ComptabiliteDaoImpl();

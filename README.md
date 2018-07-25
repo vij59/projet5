@@ -59,15 +59,15 @@ cocher Github project et entrer l'adresse Git de votre projet
 Gestion de code source : cocher Git
 Build : ajouter une action :
 1/Executer une ligne de commande batch Windows:
-   cd docker/dev
-   docker-compose stop
-   docker-compose rm -f
-   docker-compose up -d
-   sleep 25s
-   cd ..
-   cd ..
-   cd src
-   mvn clean package -P test-consumer,test-business
+   cd docker/dev <br/>;
+   docker-compose stop <br/>;
+   docker-compose rm -f <br/>;
+   docker-compose up -d <br/>;
+   sleep 25s <br/>;
+   cd .. <br/>;
+   cd .. <br/>;
+   cd src <br/>;
+   mvn clean package -P test-consumer,test-business <br/>;
 
 2/Executer une ligne de commande batch Windows:
    cd docker/dev

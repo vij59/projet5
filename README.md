@@ -58,15 +58,15 @@ Valider
 cocher Github project et entrer l'adresse Git de votre projet
 Gestion de code source : cocher Git
 Build : ajouter une action :
-1/Executer une ligne de commande batch Windows:
+1/Executer une ligne de commande batch Windows: \n
    cd docker/dev <br/>;
-   docker-compose stop <br/>;
-   docker-compose rm -f <br/>;
-   docker-compose up -d <br/>;
-   sleep 25s <br/>;
-   cd .. <br/>;
-   cd .. <br/>;
-   cd src <br/>;
+   docker-compose stop <br/>
+   docker-compose rm -f <br/>
+   docker-compose up -d <br/>
+   sleep 25s <br/>
+   cd .. <br/>
+   cd .. <br/>
+   cd src <br/>
    mvn clean package -P test-consumer,test-business <br/>;
 
 2/Executer une ligne de commande batch Windows:
@@ -76,7 +76,7 @@ Build : ajouter une action :
 
 et enfin : Apply and Save
    
-# Run Jenkins
+### Run Jenkins
 sur la page du projet jenkins, choisir l'option : Lancer un build
 cliquer sur la jauge du build en cours pour acceder à la console (console output)
 Voilà le tour est joué

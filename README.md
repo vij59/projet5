@@ -57,9 +57,9 @@ Valider<br/>
 
 cocher Github project et entrer l'adresse Git de votre projet <br/>
 Gestion de code source : cocher Git<br/>
-Build : ajouter une action :<br/>
-1/Executer une ligne de commande batch Windows: <br/>
-   cd docker/dev <br/>;
+Build : ajouter une action :<br/><br/>
+1/Executer une ligne de commande batch Windows: <br/><br/>
+   cd docker/dev <br/>
    docker-compose stop <br/>
    docker-compose rm -f <br/>
    docker-compose up -d <br/>
@@ -69,7 +69,7 @@ Build : ajouter une action :<br/>
    cd src <br/>
    mvn clean package -P test-consumer,test-business <br/>
 
-2/Executer une ligne de commande batch Windows:<br/>
+2/Executer une ligne de commande batch Windows:<br/><br/>
    cd docker/dev<br/>
    docker-compose stop<br/>
    docker-compose rm -f<br/>

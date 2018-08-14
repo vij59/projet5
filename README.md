@@ -38,3 +38,45 @@ Il comporte :
     docker-compose stop
     docker-compose rm -v
     docker-compose up
+
+
+### Jenkins Installation
+mettre en place jenkins sur le pc en 
+téléchargeant Jenkins : https://jenkins.io/doc/pipeline/tour/getting-started/
+Ouvrir le terminal dans le répertoire des téléchargements
+lancer la commande :
+java -jar jenkins.war --httpPort=8080
+entrer l'adresse suivante dans le navigateur : 
+http://localhost:8080
+
+### Jenkins Configuration
+Nouvel Item<br/>
+donner un nom au projet<br/>
+Construire un projet freestyle<br/>
+Valider<br/>
+
+cocher Github project et entrer l'adresse Git de votre projet <br/>
+Gestion de code source : cocher Git<br/>
+Build : ajouter une action :<br/><br/>
+1/Executer une ligne de commande batch Windows: <br/><br/>
+   cd docker/dev <br/>
+   docker-compose stop <br/>
+   docker-compose rm -f <br/>
+   docker-compose up -d <br/>
+   sleep 25s <br/>
+   cd .. <br/>
+   cd .. <br/>
+   cd src <br/>
+   mvn clean package -P test-consumer,test-business <br/>
+
+2/Executer une ligne de commande batch Windows:<br/><br/>
+   cd docker/dev<br/>
+   docker-compose stop<br/>
+   docker-compose rm -f<br/>
+
+et enfin : Apply and Save<br/>
+   
+### Run Jenkins
+sur la page du projet jenkins, choisir l'option : Lancer un build<br/>
+cliquer sur la jauge du build en cours pour acceder à la console (console output)<br/>
+Voilà le tour est joué<br/>

@@ -99,7 +99,7 @@ Build : ajouter une action :<br/><br/>
    cd .. <br/>
    cd .. <br/>
    cd src <br/>
-   mvn clean package -P test-consumer,test-business <br/>
+   mvn clean install sonar:sonar -P test-consumer,test-business<br/>
 
 2/Executer une ligne de commande batch Windows:<br/><br/>
    cd docker/dev<br/>

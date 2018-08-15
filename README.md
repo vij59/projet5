@@ -41,31 +41,35 @@ Il comporte :
 
 
 Corrections : 
-Model : 
+#Model : 
 - classe EcritureComptable :  la méthode getTotalCredit() appelait la méthode getDebit() au lieu de getCredit().
-Consumer : 
+
+#Consumer : 
 Dans le RowMapper, ajout de la classe SequenceEcritureComptableRM
 Dans l'interface ComptabiliteDao et dans classe ComptabiliteDaoImpl, ajout des méthodes :  
 getLastSequenceEcritureComptable(int year,String code)
 updateSequenceEcritureComptable
 insertSequenceEcritureComptable
 et modifications correspondantes dans le sqlContext.xml
-Business :
+
+#Business :
 Classes ComptabiliteManagerImpl et ComptabiliteManagerImplTest modifiées : 
 => modification le la méthode addReference et de sa méthode de test en suivant la javadoc
 ==> mise en place de la RG5 dans la méthode checkEcritureComptableUnit
 
 Tests : 
-model : 
+#model : 
 - amélioration des tests unitaires de la classe EcritureComptableTest
 - tests de toutes les autres classes de model
-business :
+#business :
 - tests unitaires dans le dossier test
 - tests d'intégration dans le dossier test-business, utilisant le SpringRegistry et le BusinessTestCase ainsi que le TestInitSpring
-consumer :
+
+#consumer :
 - tests d'intégration mis en place
 - datasourceContext configuré pour appeler la base de données
-Jacoco couverture des tests :
+
+#Jacoco couverture des tests :
 ajout du plugin jacoco dans le pom parent et dans jenkins afin de mesurer la couverture des tests.
 
 ### Jenkins Installation

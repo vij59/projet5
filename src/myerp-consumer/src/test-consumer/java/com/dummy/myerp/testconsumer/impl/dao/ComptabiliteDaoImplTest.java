@@ -85,7 +85,6 @@ public class ComptabiliteDaoImplTest extends ConsumerTestCase {
 
         Assert.assertEquals(listeSeq.size(),getDaoProxy().getComptabiliteDao().getListSequenceEcritureComptable().size());
 
-        System.out.println(getDaoProxy().getComptabiliteDao().getListSequenceEcritureComptable());
 
         // UPDATE now
 
@@ -94,7 +93,6 @@ public class ComptabiliteDaoImplTest extends ConsumerTestCase {
         listeSeq.add(sequenceEcritureComptable);
         getDaoProxy().getComptabiliteDao().updateSequenceEcritureComptable(sequenceEcritureComptable,"AC");
 
-        System.out.println(getDaoProxy().getComptabiliteDao().getListSequenceEcritureComptable());
         Assert.assertEquals(listeSeq.get(listeSeq.size()-1).getDerniereValeur(),
                 getDaoProxy().getComptabiliteDao().getListSequenceEcritureComptable().
                         get(getDaoProxy().getComptabiliteDao().getListSequenceEcritureComptable()

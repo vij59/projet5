@@ -107,7 +107,6 @@ public class ComptabiliteManagerImpl extends AbstractBusinessManager implements 
         cal.setTime(year);
         int yy = cal.get(Calendar.YEAR);
 
-        System.out.println(yy);
 
 try {
     SequenceEcritureComptable seq = getLastSequenceEcritureComptable(yy, pEcritureComptable.getJournal().getCode());
@@ -117,12 +116,8 @@ try {
 
     String reff = getDaoProxy().getComptabiliteDao().getEcritureComptableByRef(pEcritureComptable.getReference()).getReference();
     reff = reff.substring(reff.length()-5, reff.length());
-    System.out.println("ref en base : "+ reff);
 
-
-    System.out.println("derniere ref : "+y);
     int nouvelleValeur = Integer.parseInt(y);
-    System.out.print(nouvelleValeur);
     int x;
     if(seq== null) {
        x=1;
@@ -156,16 +151,12 @@ try {
         int yearBoucleNew = cal2.get(Calendar.YEAR);
         int yearBoucleRef = cal1.get(Calendar.YEAR);
 
-        System.out.println(" derniere reference = " +ecriture.getReference());
-        System.out.println(" nouvelle valeur = " +nouvelleValeur);
 
         if(yearBoucleNew == yearBoucleRef &&
                 ecriture.getJournal().getCode().equals(pEcritureComptable.getJournal().getCode())
                 && refBis == nouvelleValeur)
         {
              nouvelleValeur++;
-            System.out.println(" derniere reference = " +ecriture.getReference());
-            System.out.println(" nouvelle valeur = " +nouvelleValeur);
         }
     }
     String nvelleRef = pEcritureComptable.getJournal().getCode() + "-" + yy + "/"+ String.format("%05d",nouvelleValeur);
